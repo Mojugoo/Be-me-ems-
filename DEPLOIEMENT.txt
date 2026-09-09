@@ -1,0 +1,15 @@
+DÉPLOIEMENT RAPIDE
+
+Le dossier contient une application statique.
+Il peut être publié sur n'importe quel hébergement HTTPS acceptant des fichiers HTML statiques.
+
+Fichiers indispensables :
+- index.html
+- manifest.webmanifest
+- service-worker.js
+- icons/
+
+Une fois publié, ouvrir l'adresse dans Safari sur iPhone puis utiliser :
+Partager > Sur l'écran d'accueil.
+
+L'application fonctionne aussi hors ligne après sa première ouverture complète.

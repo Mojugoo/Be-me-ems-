@@ -1,0 +1,24 @@
+{
+  "name": "Be Me-ems",
+  "short_name": "Be Me-ems",
+  "description": "Ton carnet de musculation intelligent.",
+  "lang": "fr",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#edf5fb",
+  "theme_color": "#126bc5",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

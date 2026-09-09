@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#126bc5">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Be Me-ems">
+<title>Be Me-ems — V0.3</title>
+<style>
+:root{
+  --blue:#126bc5;--blue2:#0a4f99;--sky:#eaf5ff;--ink:#102c48;--muted:#728397;
+  --line:#dbe8f3;--white:#fff;--green:#15946b;--shadow:0 10px 30px rgba(29,84,132,.10)
+}
+*{box-sizing:border-box} body{margin:0;background:#dfeefa;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+#app{max-width:500px;min-height:100vh;margin:auto;background:linear-gradient(180deg,#f9fcff 0%,#edf5fb 100%);position:relative;overflow:hidden;padding:18px 16px 96px}
+.view{display:none;animation:fade .18s ease}.view.active{display:block}@keyframes fade{from{opacity:.25;transform:translateY(5px)}to{opacity:1;transform:none}}
+.brand{font-size:33px;font-weight:900;letter-spacing:-1.8px;font-style:italic;margin:5px 0 0}.tagline{font-size:12px;color:var(--muted);margin-top:2px}
+.top{display:flex;align-items:center;gap:12px;margin:2px 0 16px}.back{width:42px;height:42px;border-radius:14px;border:1px solid var(--line);background:#fff;font-size:23px;color:var(--ink)}.top h1{font-size:24px;margin:0}.top p{margin:2px 0 0;color:var(--muted);font-size:13px}
+.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:16px;margin:12px 0;box-shadow:var(--shadow)}
+.hero{margin:20px 0 14px;padding:22px;border-radius:26px;background:linear-gradient(135deg,#083b70,#126bc5 62%,#44a2f4);color:#fff;box-shadow:0 16px 36px rgba(18,107,197,.24)}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.9px;opacity:.72}.hero h2{font-size:28px;margin:7px 0}.hero .meta{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;opacity:.9}
+.btn{width:100%;border:0;border-radius:16px;padding:15px 16px;background:linear-gradient(135deg,#1479da,#0e61b4);color:#fff;font-size:15px;font-weight:850;margin-top:14px;box-shadow:0 10px 22px rgba(18,107,197,.22)}
+.btn.secondary{background:#fff;color:var(--blue2);border:1px solid var(--line);box-shadow:none}.btn.danger{background:#f7f9fb;color:#a13c3c;box-shadow:none}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.row h3{margin:0;font-size:16px}.sub{font-size:13px;color:var(--muted)}.pill{font-size:11px;font-weight:800;background:var(--sky);color:var(--blue2);padding:6px 10px;border-radius:999px}
+.progress{height:8px;background:#e6eef5;border-radius:999px;overflow:hidden;margin-top:12px}.progress i{display:block;height:100%;background:linear-gradient(90deg,#177de0,#5db2fa);border-radius:999px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px}.stat small{color:var(--muted);display:block}.stat strong{display:block;font-size:24px;margin-top:5px}
+.nav{position:fixed;z-index:10;bottom:0;left:50%;transform:translateX(-50%);width:min(500px,100%);display:flex;justify-content:space-around;background:rgba(255,255,255,.97);border-top:1px solid var(--line);padding:10px 4px calc(10px + env(safe-area-inset-bottom))}
+.nav button{background:none;border:0;color:var(--muted);font-size:10px;min-width:58px}.nav .icon{display:block;font-size:20px;margin-bottom:3px}.nav button.active{color:var(--blue);font-weight:850}
+.workout-card{display:flex;gap:13px;align-items:center;cursor:pointer}.cover{width:80px;height:80px;border-radius:18px;background:linear-gradient(135deg,#113d68,#3f9be8);display:grid;place-items:center;font-size:32px;flex:none}.workout-card strong{font-size:18px}.workout-card .sub{margin-top:4px}.chev{margin-left:auto;color:var(--blue);font-size:22px}
+.section{font-size:11px;font-weight:900;color:var(--blue2);letter-spacing:1px;text-transform:uppercase;margin:22px 3px 8px}
+.item{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #edf1f5}.item:last-child{border-bottom:0}.num{width:28px;height:28px;border-radius:50%;background:var(--sky);display:grid;place-items:center;color:var(--blue2);font-size:12px;font-weight:900;flex:none}.item strong{font-size:14px}.machine{font-size:11px;color:var(--blue);font-weight:800;margin-top:4px}.desc{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}.right{margin-left:auto;text-align:right;font-size:11px;color:var(--muted);white-space:nowrap}
+.visual{height:112px;width:92px;border-radius:17px;background:linear-gradient(145deg,#153d62,#2c8fe0);display:grid;place-items:center;font-size:44px;flex:none;box-shadow:inset 0 1px rgba(255,255,255,.25)}
+.exercise-card{display:flex;gap:12px;align-items:center;cursor:pointer}.exercise-card strong{font-size:15px}.exercise-card .chev{margin-left:auto}
+.session-title{text-align:center}.session-title h2{margin:6px 0;font-size:27px}.counter{font-size:12px;color:var(--blue);font-weight:900}
+.photo{height:230px;border-radius:25px;background:radial-gradient(circle at 75% 25%,#6fc0ff 0 5%,transparent 28%),linear-gradient(145deg,#123b60,#0d6cbd);display:flex;align-items:end;padding:20px;color:#fff;font-size:23px;font-weight:900;position:relative;overflow:hidden}.photo:after{content:"VISUEL DE L'EXERCICE";position:absolute;inset:0;display:grid;place-items:center;font-size:12px;letter-spacing:1px;color:#ffffff75;font-weight:900}.machinebox{padding:14px;border-radius:18px;background:var(--sky);border:1px solid #d8eafb;margin:12px 0}.machinebox small{color:var(--blue2);font-weight:850}.machinebox strong{display:block;margin-top:5px}
+.last{background:#f7fbff;border-radius:16px;padding:12px;font-size:13px}.series-head,.series{display:grid;grid-template-columns:42px 1fr 1fr 42px;gap:8px;align-items:center;margin-top:8px}.series-head{font-size:10px;color:var(--muted);font-weight:850;padding:0 3px}.series input{width:100%;padding:12px 7px;border:1px solid var(--line);border-radius:12px;text-align:center;font-size:16px;background:#fff}.check{height:42px;border-radius:12px;border:1px solid var(--line);background:#fff;font-size:17px}.check.done{background:#e7f8f0;color:var(--green);border-color:#a7dfc7}
+.rest{background:linear-gradient(145deg,#082d51,#126bc5);color:#fff;text-align:center;padding:30px 18px;border-radius:26px}.rest .bigtime{font-size:60px;font-weight:900;letter-spacing:-2px;margin:10px 0}.rest small{opacity:.7}
+.history{padding:15px 0;border-bottom:1px solid #edf1f5}.history:last-child{border-bottom:0}.history strong{font-size:15px}
+.barwrap{height:170px;display:flex;align-items:flex-end;gap:12px;border-bottom:1px solid var(--line);padding:14px 8px}.bar{flex:1;background:linear-gradient(#65b5fa,#1477d7);border-radius:10px 10px 0 0;position:relative}.bar span{position:absolute;bottom:-22px;width:100%;text-align:center;font-size:10px;color:var(--muted)}
+.empty{text-align:center;padding:45px 20px;color:var(--muted)}
+.notice{background:#fff8dd;border:1px solid #f0dc94;color:#765b00;padding:12px 14px;border-radius:15px;font-size:12px;line-height:1.45;margin:12px 0}
+</style>
+</head>
+<body>
+<div id="offlineNotice" style="display:none;position:fixed;top:8px;left:50%;transform:translateX(-50%);z-index:99;background:#102c48;color:white;padding:8px 12px;border-radius:999px;font-size:12px;font-weight:800;box-shadow:0 8px 20px rgba(0,0,0,.15)">Mode hors ligne</div>
+<div id="app">
+<section id="home" class="view active">
+  <div class="brand">Be Me-ems</div><div class="tagline">Become better. Be yourself.</div>
+  <div class="hero"><div class="eyebrow">PROCHAINE SÉANCE</div><h2 id="homeNext">Full Body A</h2><div class="meta"><span id="homeDay">Mercredi</span><span>⏱ ≈ 1 h</span><span>💪 7 exercices</span></div><button class="btn" id="homeStart">▶ Commencer la séance</button></div>
+  <div class="card"><div class="row"><h3>Cette semaine</h3><span id="weekText">0 / 2 réalisées</span></div><div class="progress"><i id="weekBar" style="width:0%"></i></div></div>
+  <div class="grid2"><div class="stat"><small>Séances enregistrées</small><strong id="sessionCount">0</strong></div><div class="stat"><small>Poids actuel</small><strong id="homeWeight">91,0 kg</strong></div></div>
+</section>
+
+<section id="workouts" class="view">
+  <div class="top"><button class="back" data-go="home">‹</button><div><h1>Mes séances</h1><p>Ton programme actuel</p></div></div>
+  <div class="card workout-card" data-workout="A"><div class="cover">🏋️</div><div><strong>Full Body A</strong><div class="sub">Mercredi · 7 exercices</div><div class="sub">Presse · Incliné · Tirage vertical…</div></div><div class="chev">›</div></div>
+  <div class="card workout-card" data-workout="B"><div class="cover">💪</div><div><strong>Full Body B</strong><div class="sub">Vendredi · 7 exercices</div><div class="sub">Goblet · Rowing · Chest press…</div></div><div class="chev">›</div></div>
+</section>
+
+<section id="detail" class="view">
+  <div class="top"><button class="back" data-go="workouts">‹</button><div><h1 id="detailName"></h1><p id="detailDay"></p></div></div>
+  <div id="detailList"></div><button class="btn" id="detailStart">Commencer la séance</button>
+</section>
+
+<section id="exercise" class="view">
+  <div class="top"><button class="back" id="quitSession">×</button><div><h1 id="sessionWorkout"></h1><p id="sessionStep"></p></div></div>
+  <div class="session-title"><div class="counter" id="exTarget"></div><h2 id="exName"></h2></div>
+  <div class="photo" id="exPhoto"><span id="exPhotoText"></span></div>
+  <div class="machinebox"><small>🏋️ MACHINE / MATÉRIEL</small><strong id="exMachine"></strong></div>
+  <div class="last"><div class="row"><strong>Dernière séance</strong><span class="pill" id="lastLabel">Première séance</span></div><div class="sub" id="lastDetail" style="margin-top:7px">Enregistre tes premières performances pour obtenir une recommandation.</div></div>
+  <div class="card"><div class="series-head"><span>Série</span><span>Poids</span><span>Reps</span><span></span></div><div id="seriesList"></div></div>
+  <button class="btn" id="nextBtn"></button>
+</section>
+
+<section id="rest" class="view">
+  <div class="top"><button class="back" id="restBack">‹</button><div><h1>Repos</h1><p id="restExercise"></p></div></div>
+  <div class="rest"><small>PROCHAINE SÉRIE</small><div class="bigtime" id="timer">01:30</div><div>Récupère, respire… tu repars bientôt 💙</div></div>
+  <button class="btn secondary" id="skipRest">Passer le repos</button>
+</section>
+
+<section id="history" class="view">
+  <div class="top"><button class="back" data-go="home">‹</button><div><h1>Historique</h1><p>Toutes tes séances</p></div></div><div id="historyList"></div>
+</section>
+
+<section id="progress" class="view">
+  <div class="top"><button class="back" data-go="home">‹</button><div><h1>Progression</h1><p>Les chiffres qui comptent</p></div></div>
+  <div class="grid2"><div class="stat"><small>Séances</small><strong id="progSessions">0</strong></div><div class="stat"><small>Exercices suivis</small><strong id="progExercises">0</strong></div></div>
+  <div class="card"><h3 style="margin:0 0 4px">Volume d'entraînement</h3><div class="sub">Le graphique se construira avec tes vraies données.</div><div class="barwrap"><div class="bar" style="height:30%"><span>S1</span></div><div class="bar" style="height:45%"><span>S2</span></div><div class="bar" style="height:62%"><span>S3</span></div><div class="bar" style="height:80%"><span>S4</span></div></div></div>
+  <div class="card"><h3 style="margin-top:0">Mes records</h3><div id="records" class="sub">Tes records apparaîtront après tes premières séances.</div></div>
+</section>
+
+<section id="profile" class="view">
+  <div class="top"><button class="back" data-go="home">‹</button><div><h1>Mon évolution</h1><p>Ton suivi personnel</p></div></div>
+  <div class="card"><div class="sub">Poids actuel</div><div style="font-size:34px;font-weight:900;margin:4px 0" id="profileWeight">91,0 kg</div><button class="btn" id="addWeight">+ Ajouter une mesure</button></div>
+  <div class="card"><h3 style="margin-top:0">Historique du poids</h3><div id="weightList"></div></div>
+</section>
+
+<nav class="nav">
+<button class="active" data-nav="home"><span class="icon">⌂</span>Accueil</button>
+<button data-nav="workouts"><span class="icon">🏋️</span>Séances</button>
+<button data-nav="progress"><span class="icon">▥</span>Progression</button>
+<button data-nav="profile"><span class="icon">◉</span>Profil</button>
+</nav>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const state={current:'A',index:0,timer:null};
+const workouts={
+A:{name:'Full Body A',day:'Mercredi',warm:[
+['Vélo ou tapis','5 min','Cardio très léger pour augmenter progressivement la température corporelle.','🚴'],
+['Mobilité + squats à vide','3 min','Rotations d’épaules et de bras, puis environ 10 squats au poids du corps.','🤸'],
+['Échauffement presse à cuisses','1–2 séries légères','Répétitions avec une charge faible avant de commencer les séries de travail.','🦵']],
+cool:['Marche tranquille','5 min facultatives'],
+ex:[
+['Presse à cuisses','3 × 10–12','1 min 30','Presse à cuisses / Leg Press','Pousser la plateforme avec les jambes, pieds à plat, en descendant de manière contrôlée.','🦵'],
+['Développé incliné à la machine','3 × 10–12','1 min 30','Machine de développé incliné','Pousser les poignées devant soi sur un banc incliné pour travailler principalement les pectoraux et les triceps.','🏋️'],
+['Tirage vertical à la poulie','3 × 10–12','1 min 30','Poulie haute / Lat Pulldown','Tirer la barre vers le haut de la poitrine en abaissant les coudes pour travailler le dos.','⬇️'],
+['Leg curl','2 × 12–15','1 min','Machine Leg Curl','Plier les jambes contre une résistance pour travailler l’arrière des cuisses.','🦵'],
+['Élévations latérales','3 × 12–20','1 min','Haltères','Lever légèrement les bras sur les côtés avec des haltères pour développer la largeur des épaules.','💪'],
+['Extension triceps à la poulie','2 × 12–15','1 min','Poulie haute + corde ou poignée','Pousser la poignée ou la corde vers le bas en gardant les coudes proches du corps.','⬇️'],
+['Crunch à la poulie / machine','3 × 10–15','1 min','Poulie ou machine abdominale','Enrouler le buste contre une résistance en contractant les abdominaux.','🔥']]},
+B:{name:'Full Body B',day:'Vendredi',warm:[
+['Vélo ou tapis','5 min','Cardio léger pour commencer à échauffer progressivement le corps.','🚴'],
+['Mobilité générale','3 min','Rotations des épaules, bras et hanches, avec quelques mouvements à vide.','🤸'],
+['Échauffement Goblet squat','1–2 séries légères','Répétitions légères pour apprendre et préparer le mouvement avant les séries de travail.','🏋️']],
+cool:null,
+ex:[
+['Goblet squat','3 × 10–12','1 min 30','Haltère','Descendre en squat en tenant un haltère contre la poitrine, dos droit et mouvement contrôlé.','🏋️'],
+['Rowing assis à la poulie','3 × 10–12','1 min 30','Poulie basse / Row assis','Tirer la poignée vers le ventre en rapprochant les omoplates pour travailler le milieu du dos.','↔️'],
+['Chest press à la machine','3 × 10–12','1 min 30','Machine Chest Press','Pousser les poignées vers l’avant pour travailler principalement les pectoraux et les triceps.','🏋️'],
+['Soulevé de terre roumain avec haltères','2 × 10–12','1 min 30','Haltères','Descendre les haltères le long des jambes en reculant les hanches pour travailler fessiers et arrière des cuisses.','🏋️'],
+['Élévations latérales','3 × 12–20','1 min','Haltères','Lever les haltères sur les côtés de façon contrôlée pour développer les épaules.','💪'],
+['Curl biceps à la poulie','2 × 10–15','1 min','Poulie basse + barre ou poignée','Plier les bras contre la résistance en gardant les coudes relativement fixes.','💪'],
+['Gainage','3 × 30–45 sec','45 sec','Tapis de sol','Maintenir le corps droit et gainé sur les avant-bras sans laisser tomber ou monter les hanches.','🧘']]}
+};
+let data=JSON.parse(localStorage.getItem('be-me-ems-v03')||'{"history":[],"weight":[{"date":"30/08/2026","value":91}],"perf":{}}');
+function save(){localStorage.setItem('be-me-ems-v03',JSON.stringify(data));renderHome();renderProgress()}
+function go(view){clearInterval(state.timer);document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));$(view).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.nav===view));if(view==='history')renderHistory();if(view==='profile')renderProfile();window.scrollTo({top:0,behavior:'instant'})}
+function renderHome(){const done=data.history.length;const weight=data.weight[0].value; $('sessionCount').textContent=done;$('homeWeight').textContent=weight.toFixed(1).replace('.',',')+' kg';$('weekText').textContent=Math.min(done,2)+' / 2 réalisées';$('weekBar').style.width=Math.min(done,2)*50+'%'}
+function renderDetail(k){state.current=k;const w=workouts[k];$('detailName').textContent=w.name;$('detailDay').textContent=w.day;let html='<div class="section">Échauffement</div><div class="card">';
+w.warm.forEach((e,i)=>html+=`<div class="item"><div class="num">${i+1}</div><div><strong>${e[0]}</strong><div class="desc">${e[2]}</div></div><div class="right">${e[1]}</div></div>`);html+='</div><div class="section">Séance</div>';
+w.ex.forEach((e,i)=>html+=`<div class="card exercise-card" data-ex="${i}"><div class="visual">${e[6]}</div><div><strong>${e[0]}</strong><div class="machine">Machine : ${e[3]}</div><div class="desc">${e[1]} · Repos ${e[2]}</div></div><div class="chev">›</div></div>`);
+if(w.cool)html+=`<div class="section">Retour au calme</div><div class="card"><strong>${w.cool[0]}</strong><div class="desc">${w.cool[1]}</div></div>`;
+$('detailList').innerHTML=html;document.querySelectorAll('[data-ex]').forEach(el=>el.onclick=()=>{state.index=Number(el.dataset.ex);go('exercise');renderExercise()});$('detailStart').onclick=()=>{state.index=0;go('exercise');renderExercise()};go('detail')}
+function renderExercise(){const w=workouts[state.current],e=w.ex[state.index],n=parseInt(e[1]);$('sessionWorkout').textContent=w.name;$('sessionStep').textContent=`Exercice ${state.index+1} / ${w.ex.length}`;$('exTarget').textContent=`${e[1]} · Repos ${e[2]}`;$('exName').textContent=e[0];$('exPhotoText').textContent=e[6]+'  '+e[0];$('exMachine').textContent=e[3];
+const p=data.perf[e[0]];$('lastLabel').textContent=p?'Dernière performance':'Première séance';$('lastDetail').textContent=p?`${p.weight||'—'} kg · ${p.reps.join(' / ')}`:'Enregistre tes premières performances pour obtenir une recommandation.';
+let rows='';for(let i=1;i<=n;i++)rows+=`<div class="series"><strong>${i}</strong><input inputmode="decimal" id="kg${i}" placeholder="kg"><input inputmode="numeric" id="rep${i}" placeholder="reps"><button class="check" data-set="${i}">○</button></div>`;$('seriesList').innerHTML=rows;
+document.querySelectorAll('[data-set]').forEach(b=>b.onclick=()=>completeSet(Number(b.dataset.set),n,e));
+$('nextBtn').textContent=state.index===w.ex.length-1?'Terminer la séance 🎉':'Passer à l’exercice suivant →';
+}
+function completeSet(i,n,e){const kg=$('kg'+i).value,rep=$('rep'+i).value;if(!kg&&!rep)return;const reps=[];for(let j=1;j<=n;j++){const v=$('rep'+j).value;if(v)reps.push(v)}data.perf[e[0]]={weight:kg,reps};save();const btn=document.querySelector(`[data-set="${i}"]`);btn.textContent='✓';btn.classList.add('done');startRest(workouts[state.current].ex[state.index][2],e[0])}
+function startRest(txt,name){let sec=txt.includes('45')?45:(txt.includes('1 min')&&!txt.includes('30')?60:90);$('restExercise').textContent=name;$('timer').textContent=format(sec);go('rest');state.timer=setInterval(()=>{sec--; $('timer').textContent=format(Math.max(sec,0));if(sec<=0){clearInterval(state.timer);if(navigator.vibrate)navigator.vibrate([150,80,150]);}},1000)}
+function format(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function nextExercise(){const w=workouts[state.current];if(state.index<w.ex.length-1){state.index++;renderExercise();window.scrollTo(0,0)}else{data.history.unshift({date:new Date().toLocaleDateString('fr-FR'),name:w.name,ex:w.ex.length});save();go('history')}}
+function renderHistory(){$('historyList').innerHTML=data.history.length?data.history.map(h=>`<div class="card history"><div class="row"><strong>${h.name}</strong><span class="pill">Terminé ✓</span></div><div class="sub">${h.date} · ${h.ex} exercices</div></div>`).join(''):'<div class="empty">Ta première séance terminée apparaîtra ici 💙</div>'}
+function renderProgress(){$('progSessions').textContent=data.history.length;$('progExercises').textContent=Object.keys(data.perf).length;const vals=Object.entries(data.perf).slice(0,5);$('records').innerHTML=vals.length?vals.map(([n,p])=>`<div class="row" style="padding:8px 0;border-bottom:1px solid #edf1f5"><span>${n}</span><strong>${p.weight||'—'} kg</strong></div>`).join(''):'Tes records apparaîtront après tes premières séances.'}
+function renderProfile(){const w=data.weight[0].value;$('profileWeight').textContent=w.toFixed(1).replace('.',',')+' kg';$('weightList').innerHTML=data.weight.map(x=>`<div class="row" style="padding:10px 0;border-bottom:1px solid #edf1f5"><span>${x.date}</span><strong>${x.value.toFixed(1).replace('.',',')} kg</strong></div>`).join('')}
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));document.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>go(b.dataset.nav));document.querySelectorAll('[data-workout]').forEach(c=>c.onclick=()=>renderDetail(c.dataset.workout));$('homeStart').onclick=()=>renderDetail('A');$('nextBtn').onclick=nextExercise;$('quitSession').onclick=()=>go('home');$('restBack').onclick=()=>go('exercise');$('skipRest').onclick=()=>go('exercise');
+$('addWeight').onclick=()=>{const raw=prompt('Ton nouveau poids en kg :');if(raw===null)return;const value=Number(String(raw).replace(',','.'));if(value>30&&value<250){data.weight.unshift({date:new Date().toLocaleDateString('fr-FR'),value});save();renderProfile()}};
+renderHome();renderProgress();renderProfile();
+// PWA / offline support
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js'));
+}
+function updateOnlineState(){
+  document.getElementById('offlineNotice').style.display=navigator.onLine?'none':'block';
+}
+window.addEventListener('online',updateOnlineState);window.addEventListener('offline',updateOnlineState);updateOnlineState();
+</script>
+</body>
+</html>
