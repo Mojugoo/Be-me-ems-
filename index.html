@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#126bc5">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Be Me-ems">
+<title>Be Me-ems — Machines uniquement</title>
+<style>
+:root{--blue:#126bc5;--blue2:#0a4f99;--sky:#eaf5ff;--ink:#102c48;--muted:#728397;--line:#dbe8f3;--green:#15946b;--shadow:0 10px 30px rgba(29,84,132,.10)}
+*{box-sizing:border-box}
+body{margin:0;background:#dfeefa;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+#app{max-width:500px;min-height:100vh;margin:auto;background:linear-gradient(180deg,#f9fcff 0%,#edf5fb 100%);padding:18px 16px 96px}
+.brand{font-size:33px;font-weight:900;letter-spacing:-1.8px;font-style:italic;margin:5px 0 0}
+.tagline{font-size:12px;color:var(--muted);margin-top:2px}
+.hero{margin:20px 0 14px;padding:22px;border-radius:26px;background:linear-gradient(135deg,#083b70,#126bc5 62%,#44a2f4);color:#fff;box-shadow:0 16px 36px rgba(18,107,197,.24)}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.9px;opacity:.75}
+.hero h2{font-size:28px;margin:7px 0}
+.meta{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;opacity:.9}
+.btn{width:100%;border:0;border-radius:16px;padding:15px 16px;background:linear-gradient(135deg,#1479da,#0e61b4);color:#fff;font-size:15px;font-weight:850;margin-top:14px;box-shadow:0 10px 22px rgba(18,107,197,.22)}
+.btn.secondary{background:#fff;color:var(--blue2);border:1px solid var(--line);box-shadow:none}
+.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:16px;margin:12px 0;box-shadow:var(--shadow)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.row h3{margin:0;font-size:17px}
+.sub{font-size:13px;color:var(--muted)}
+.pill{font-size:11px;font-weight:800;background:var(--sky);color:var(--blue2);padding:6px 10px;border-radius:999px}
+.item{display:flex;align-items:flex-start;gap:10px;padding:13px 0;border-bottom:1px solid #edf1f5}
+.item:last-child{border-bottom:0}
+.num{width:28px;height:28px;border-radius:50%;background:var(--sky);display:grid;place-items:center;color:var(--blue2);font-size:12px;font-weight:900;flex:none}
+.item strong{font-size:14px}
+.machine{font-size:11px;color:var(--blue);font-weight:800;margin-top:4px}
+.desc{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}
+.back{width:42px;height:42px;border-radius:14px;border:1px solid var(--line);background:#fff;font-size:23px;color:var(--ink);margin-bottom:15px}
+.top{display:flex;align-items:center;gap:12px;margin:2px 0 16px}
+.top h1{font-size:24px;margin:0}
+.top p{margin:2px 0 0;color:var(--muted);font-size:13px}
+.notice{background:#fff8dd;border:1px solid #f0dc94;color:#765b00;padding:12px 14px;border-radius:15px;font-size:12px;line-height:1.45;margin:12px 0}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+const workouts = {
+  A: {
+    name: "Full Body A",
+    day: "Mercredi",
+    exercises: [
+      {name:"Presse à cuisses", machine:"Presse à cuisses guidée", sets:3, reps:"10–12"},
+      {name:"Chest press incliné", machine:"Machine chest press inclinée", sets:3, reps:"10–12"},
+      {name:"Tirage vertical", machine:"Machine tirage vertical", sets:3, reps:"10–12"},
+      {name:"Leg curl assis", machine:"Machine leg curl assis", sets:3, reps:"10–12"},
+      {name:"Élévations latérales", machine:"Machine élévations latérales", sets:3, reps:"12–15"},
+      {name:"Extension triceps", machine:"Machine extension triceps", sets:3, reps:"10–12"},
+      {name:"Crunch abdominal", machine:"Machine crunch abdominale", sets:3, reps:"12–15"}
+    ]
+  },
+  B: {
+    name: "Full Body B",
+    day: "Vendredi",
+    exercises: [
+      {name:"Hack squat guidé", machine:"Machine hack squat", sets:3, reps:"8–12"},
+      {name:"Rowing assis", machine:"Machine rowing assis", sets:3, reps:"10–12"},
+      {name:"Chest press", machine:"Machine chest press", sets:3, reps:"10–12"},
+      {name:"Leg extension", machine:"Machine leg extension", sets:3, reps:"10–12"},
+      {name:"Shoulder press", machine:"Machine shoulder press", sets:3, reps:"10–12"},
+      {name:"Curl biceps", machine:"Machine curl biceps", sets:3, reps:"10–12"},
+      {name:"Crunch abdominal", machine:"Machine crunch abdominale", sets:3, reps:"12–15"}
+    ]
+  }
+};
+
+function home(){
+  document.getElementById("app").innerHTML = `
+    <div class="brand">Be Me-ems</div>
+    <div class="tagline">Become better. Be yourself.</div>
+
+    <div class="hero">
+      <div class="eyebrow">PROGRAMME MACHINES UNIQUEMENT</div>
+      <h2>Full Body A</h2>
+      <div class="meta">
+        <span>Mercredi</span>
+        <span>⏱ ≈ 1 h</span>
+        <span>💪 7 exercices</span>
+      </div>
+      <button class="btn" onclick="showWorkout('A')">Voir la séance A</button>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <h3>Full Body B</h3>
+        <span class="pill">100% machines</span>
+      </div>
+      <div class="sub" style="margin-top:7px">
+        Vendredi · Hack squat · Rowing · Chest press · Leg extension · Shoulder press · Curl biceps · Crunch
+      </div>
+      <button class="btn" onclick="showWorkout('B')">Voir la séance B</button>
+    </div>
+
+    <div class="card">
+      <strong>Règle du programme</strong>
+      <div class="sub" style="margin-top:7px">
+        Toutes les séances sont réalisées avec des machines guidées ou des poulies.
+        Aucun haltère, aucune barre, aucun kettlebell et aucun exercice uniquement au poids du corps.
+      </div>
+    </div>
+  `;
+}
+
+function showWorkout(key){
+  const w = workouts[key];
+
+  document.getElementById("app").innerHTML = `
+    <button class="back" onclick="home()">‹</button>
+
+    <div class="top">
+      <div>
+        <h1>${w.name}</h1>
+        <p>${w.day} · 7 exercices · 100% machines</p>
+      </div>
+    </div>
+
+    <div class="card">
+      ${w.exercises.map((e,i)=>`
+        <div class="item">
+          <div class="num">${i+1}</div>
+          <div>
+            <strong>${e.name}</strong>
+            <div class="machine">🏋️ ${e.machine}</div>
+            <div class="desc">${e.sets} séries · ${e.reps} répétitions</div>
+          </div>
+        </div>
+      `).join("")}
+    </div>
+
+    <div class="notice">
+      ✅ Cette séance est entièrement compatible avec un entraînement sur machines.
+    </div>
+
+    <button class="btn" onclick="startWorkout('${key}')">
+      Commencer la séance
+    </button>
+  `;
+}
+
+function startWorkout(key){
+  alert("Séance " + key + " prête ! Toutes les exercices sont sur machines.");
+}
+
+home();
+</script>
+</body>
+</html>
